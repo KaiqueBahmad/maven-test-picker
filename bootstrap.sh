@@ -3,17 +3,17 @@
 # bootstrap.sh — one-line installer for maven-test-picker.
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/kaiqueBahmad/maven-test-picker/main/bootstrap.sh | bash
 #
 # Environment variables:
-#   MTP_REPO     git URL of the repo (default: https://github.com/your-user/maven-test-picker.git)
+#   MTP_REPO     git URL of the repo (default: https://github.com/kaiqueBahmad/maven-test-picker.git)
 #   MTP_BRANCH   branch/tag to checkout (default: main)
 #   MTP_DIR      where to clone the repo (default: ~/.local/share/maven-test-picker)
 #   MTP_PREFIX   passed to install.sh as --prefix (optional)
 #
 set -euo pipefail
 
-REPO="${MTP_REPO:-https://github.com/your-user/maven-test-picker.git}"
+REPO="${MTP_REPO:-https://github.com/kaiqueBahmad/maven-test-picker.git}"
 BRANCH="${MTP_BRANCH:-main}"
 TARGET_DIR="${MTP_DIR:-$HOME/.local/share/maven-test-picker}"
 PREFIX="${MTP_PREFIX:-}"
