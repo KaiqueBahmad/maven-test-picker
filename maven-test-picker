@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# maven-test-picker
+# Interactive TUI to pick and run Maven tests.
+#
+set -euo pipefail
+
+# Resolve o caminho real do script, mesmo via symlink
+SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
+
+# Diretório de onde o usuário invocou o comando (raiz esperada do projeto Maven)
+INVOKED_FROM="$PWD"
+
+# Sanity checks rápidos
+if ! command -v mvn >/dev/null 2>&1; then
+    echo "Error: 'mvn' not found in PATH." >&2
+    exit 1
+fi
+
+if ! command -v poetry >/dev/null 2>&1; then
+    echo "Error: 'poetry' not found in PATH." >&2
+    echo "Install: https://python-poetry.org/docs/#installation" >&2
+    exit 1
+fi
+
+# Instala deps no diretório do script, não no do usuário
+cd "$SCRIPT_DIR"
+poetry install --quiet --no-root
+
+# Roda o script Python passando o diretório original
+poetry run python test_runner.py "$INVOKED_FROM"
