@@ -36,7 +36,7 @@ Works with any JUnit 5 project on Maven — **Micronaut**, **Spring Boot**, plai
 ### Quick install (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh | bash
+curl -fsSL https://raw.githubusercontent.com/kaiqueBahmad/maven-test-picker/main/bootstrap.sh | bash
 ```
 
 This clones the repo into `~/.local/share/maven-test-picker`, installs the Python dependencies via Poetry, and creates a symlink in a directory on your `PATH` (preferring `~/.local/bin`, then `~/bin`).
@@ -45,15 +45,15 @@ Customize via env vars:
 
 ```bash
 # Different install location for the symlink
-curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+curl -fsSL https://raw.githubusercontent.com/kaiqueBahmad/maven-test-picker/main/bootstrap.sh \
   | MTP_PREFIX=/usr/local/bin bash
 
 # Specific branch/tag
-curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+curl -fsSL https://raw.githubusercontent.com/kaiqueBahmad/maven-test-picker/main/bootstrap.sh \
   | MTP_BRANCH=v0.2.0 bash
 
 # Custom clone location
-curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+curl -fsSL https://raw.githubusercontent.com/kaiqueBahmad/maven-test-picker/main/bootstrap.sh \
   | MTP_DIR=~/tools/maven-test-picker bash
 ```
 
@@ -64,7 +64,7 @@ Re-running the one-liner updates an existing install.
 Clone the repo and run the installer:
 
 ```bash
-git clone https://github.com/your-user/maven-test-picker.git ~/projetos/maven-test-picker
+git clone https://github.com/kaiqueBahmad/maven-test-picker.git ~/projetos/maven-test-picker
 cd ~/projetos/maven-test-picker
 ./install.sh
 ```
@@ -182,7 +182,7 @@ maven-test-picker/
 ## Development
 
 ```bash
-git clone https://github.com/your-user/maven-test-picker.git
+git clone https://github.com/kaiqueBahmad/maven-test-picker.git
 cd maven-test-picker
 poetry install
 poetry run python test_runner.py /path/to/some/maven-project
