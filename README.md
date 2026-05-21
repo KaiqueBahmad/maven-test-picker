@@ -33,30 +33,58 @@ Works with any JUnit 5 project on Maven — **Micronaut**, **Spring Boot**, plai
 
 ## Install
 
-Clone the repo anywhere:
+### Quick install (recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh | bash
+```
+
+This clones the repo into `~/.local/share/maven-test-picker`, installs the Python dependencies via Poetry, and creates a symlink in a directory on your `PATH` (preferring `~/.local/bin`, then `~/bin`).
+
+Customize via env vars:
+
+```bash
+# Different install location for the symlink
+curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+  | MTP_PREFIX=/usr/local/bin bash
+
+# Specific branch/tag
+curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+  | MTP_BRANCH=v0.2.0 bash
+
+# Custom clone location
+curl -fsSL https://raw.githubusercontent.com/your-user/maven-test-picker/main/bootstrap.sh \
+  | MTP_DIR=~/tools/maven-test-picker bash
+```
+
+Re-running the one-liner updates an existing install.
+
+### Manual install
+
+Clone the repo and run the installer:
 
 ```bash
 git clone https://github.com/your-user/maven-test-picker.git ~/projetos/maven-test-picker
 cd ~/projetos/maven-test-picker
-chmod +x maven-test-picker
+./install.sh
 ```
 
-Add it to your `PATH`. Two common ways:
+The installer:
 
-**Symlink into `~/.local/bin`** (already on PATH in most modern distros):
+- Checks for `python3` (3.10+), `poetry`, and `mvn`
+- Installs the Python dependencies via Poetry
+- Creates a symlink in the first PATH directory it finds (preferring `~/.local/bin`, then `~/bin`)
+
+### Installer options
 
 ```bash
-ln -s ~/projetos/maven-test-picker/maven-test-picker ~/.local/bin/maven-test-picker
+./install.sh --prefix ~/.local/bin    # install symlink into a specific directory
+./install.sh --prefix /usr/local/bin  # may need sudo
+./install.sh --uninstall              # remove the symlink
+./install.sh --help
 ```
 
-**Or add the folder to PATH**:
-
-```bash
-echo 'export PATH="$HOME/projetos/maven-test-picker:$PATH"' >> ~/.bashrc
-source ~/.bashrc
-```
-
-The first invocation installs the Python dependencies via Poetry (one-time, ~10s).
+If the chosen directory isn't on your `PATH`, the installer prints the line you need to add to your shell rc file.
 
 ## Usage
 
@@ -146,6 +174,8 @@ maven-test-picker/
 ├── test_runner.py        # Python TUI + scanner
 ├── pyproject.toml        # Poetry config (javalang + prompt_toolkit)
 ├── poetry.lock
+├── install.sh            # local installer / uninstaller
+├── bootstrap.sh          # remote one-line installer (curl | bash)
 └── README.md
 ```
 
