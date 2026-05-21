@@ -23,6 +23,7 @@ import javalang
 from prompt_toolkit import Application
 from prompt_toolkit.buffer import Buffer
 from prompt_toolkit.key_binding import KeyBindings
+from prompt_toolkit.data_structures import Point
 from prompt_toolkit.layout import Layout, HSplit, Window
 from prompt_toolkit.layout.controls import FormattedTextControl, BufferControl
 from prompt_toolkit.styles import Style
@@ -290,7 +291,13 @@ def build_app(selector: Selector) -> Application:
     layout = Layout(HSplit([
         Window(content=FormattedTextControl(render_header), height=1),
         Window(content=FormattedTextControl(render_filter), height=1),
-        Window(content=FormattedTextControl(render_list), always_hide_cursor=True),
+        Window(
+            content=FormattedTextControl(
+                render_list,
+                get_cursor_position=lambda: Point(x=0, y=selector.cursor),
+            ),
+            always_hide_cursor=True,
+        ),
         Window(content=FormattedTextControl(render_footer), height=1),
         Window(content=BufferControl(buffer=selector.filter_buffer), height=0),
     ]))
